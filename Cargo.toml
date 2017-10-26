@@ -3,6 +3,18 @@ name = "redif"
 version = "0.1.0"
 authors = ["kuerant <kuerant@gmail.com>"]
 
+description = "Redis protocol server Framework"
+
+documentation = "https://github.com/kuerant/redif-rs"
+homepage = "https://github.com/kuerant/redif-rs"
+repository = "https://github.com/kuerant/redif-rs"
+
+keywords = ["redis", "amy"]
+
+license = "MIT"
+readme = "README.md"
+
+
 [dependencies]
 amy = "0.8"
 log = "0.3"
