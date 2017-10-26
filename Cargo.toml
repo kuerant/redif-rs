@@ -1,0 +1,15 @@
+[package]
+name = "redif"
+version = "0.1.0"
+authors = ["kuerant <kuerant@gmail.com>"]
+
+[dependencies]
+amy = "0.8"
+log = "0.3"
+
+[dev-dependencies]
+clap = "^2.0"
+log = "0.3"
+env_logger = "0.4"
+time = "0.1"
+
