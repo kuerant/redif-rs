@@ -51,7 +51,7 @@ pub fn run<T: Send + Handler + 'static>(port: u16, handler: Arc<Mutex<T>>) -> Re
             } else {
                 if let Err(e) = handle_poll_notification(&notification, &registrar, &mut connections, handler.clone()) {
                     if let Some(conn) = connections.remove(&notification.id) {
-                        registrar.deregister(&conn.sock);
+                        registrar.deregister(&conn.sock).unwrap();
                         error!("fail to handle poll notification Event::{:?} sock#{} {} -- {}", &notification.event, &notification.id, &conn.addr, e);
                     } else {
                         error!("fail to handle poll notification Event::{:?} sock#{} -- {}", &notification.event, &notification.id, e);
@@ -87,7 +87,7 @@ struct Conn {
 
 // Assume only TcpStream notifications for now. Error handling is done by the (elided) caller.
 fn handle_poll_notification<T: Send + Handler>(notification: &Notification,
-                            registrar: &Registrar,
+                            _registrar: &Registrar,
                             connections: &mut HashMap<usize, Conn>,
                             handler: Arc<Mutex<T>>) -> Result<()> {
     //info!("DEBUG handle notification {:?} ...", notification);
