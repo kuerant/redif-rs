@@ -10,6 +10,11 @@ use frame_writer::FrameWriter;
 use Handler;
 use std::sync::{Arc,Mutex};
 
+/// Redif framework entry point
+///
+/// redif should be invoke with a TCP port and a request handler 
+/// where user customize action taken on data.
+///
 pub fn run<T: Send + Handler + 'static>(port: u16, handler: Arc<Mutex<T>>) -> Result<()> {
     use std::thread;
     use std::sync::mpsc::channel;

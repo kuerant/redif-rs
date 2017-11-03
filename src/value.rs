@@ -5,26 +5,31 @@ use std::fmt;
 use std::str;
 
 
+/// Represents a RESP value, see [Redis Protocol specification](http://redis.io/topics/protocol).
 #[derive(PartialEq, Eq, Clone)]
 pub enum Value {
-    /// A nil response from the server.
+    /// A nil response, `$-1\r\n`
     Nil,
+    /// Null array response, `*-1\r\n`
     NullArray,
     /// An integer response.  Note that there are a few situations
     /// in which redis actually returns a string for an integer which
     /// is why this library generally treats integers and strings
     /// the same for all numeric responses.
+    /// With the first byte of the response is ":".
     Int(i64),
     /// An arbitary binary data.
+    /// With the first byte of the response is "$".
     Data(Vec<u8>),
     /// A bulk response of more data.  This is generally used by redis
     /// to express nested structures.
+    /// With the first byte of the response is "*".
     Bulk(Vec<Value>),
-    /// A status response.
+    /// A status response with the first byte of the response is "+".
     Status(String),
-    /// A status response which represents the string "OK".
+    ///// A status response which represents the string "OK".
     //Okay,
-    /// An error response.
+    /// An error response with the first byte of the response is "-".
     Error(String),
 }
 

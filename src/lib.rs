@@ -60,6 +60,12 @@ pub use value::Value;
 pub use value::encode_slice;
 pub use redif::run;
 
+/// Handler  handle client's request and produce response
+///
+/// if there is Some(response), then redif will send response to client;
+/// if there is None response, then redif would send nothing to client,
+/// and client maybe starve!
+///
 pub trait Handler {
     fn handle(&mut self, req: &Value) -> Option<Value>;
 }
