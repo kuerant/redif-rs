@@ -8,7 +8,7 @@ use redif::{Value, Handler};
 fn main() {
     let args = clap::App::new("Redis Server Framework")
         .version("0.1.0")
-        .author("kuerant@126.com")
+        .author("kuerant@gmail.com")
         .about("redis protocol server framework")
         .arg(clap::Arg::with_name("port")
              .short("p")
